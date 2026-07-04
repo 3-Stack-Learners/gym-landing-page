@@ -29,6 +29,21 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleMobileMenuScroll = () => {
+      if (window.innerWidth < 768) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleMobileMenuScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleMobileMenuScroll);
+    };
+  }, [isOpen]);
+
   const navLinks = [
     { label: "Home", href: "#home" },
     { label: "About", href: "#about" },
