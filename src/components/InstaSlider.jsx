@@ -1,8 +1,10 @@
 import React from "react";
+import mf2Image from "../assets/mf2.jpg";
+import mfImage from "../assets/mf.jpg";
 
 const images = [
-  "src/assets/mf2.jpg",
-  "src/assets/mf.jpg",
+  mf2Image,
+  mfImage,
   "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=600&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1538805060514-97d9cc17730c?q=80&w=600&auto=format&fit=crop",
@@ -35,7 +37,7 @@ const InstaSlider = () => {
               src={src}
               alt={`gallery-${idx}`}
               draggable={false}
-              className="h-36 w-36 sm:h-48 sm:w-48 md:h-64 md:w-64 object-cover rounded-xl shadow-lg shrink-0"
+              className="w-56 h-72 sm:w-72 sm:h-96 md:w-80 md:h-[420px] object-cover rounded-2xl shadow-2xl border border-white/10 transition-all duration-500 ease-in-out hover:scale-105 hover:border-red-500/50 hover:shadow-red-500/10 cursor-pointer shrink-0"
             />
           ))}
         </div>
