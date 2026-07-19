@@ -8,7 +8,7 @@ const ContactForm = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
   const [phone, setPhone] = useState("");
   const [goal, setGoal] = useState("");
 
-  const phonePattern = /^[6-9]\d{9}$/;
+  const phonePattern = /^[6-9](?:\s*\d){9}$/ 
 
   const handleTrialSubmit = (event) => {
     event.preventDefault();
