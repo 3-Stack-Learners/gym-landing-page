@@ -1,5 +1,5 @@
 const gymThemeConfig = {
-  gymName: "THE MUSCLE FACTORY",
+  gymName: "IRONFORGE GYM",
   design: {
     fontFamily: "font-sans",
     colors: {

@@ -29,7 +29,7 @@ const ContactForm = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
       return;
     }
 
-    const message = `Hello The Muscle Factory Gym, I want to book a free trial batch slot. Details - Name: ${trimmedName}, Phone: ${phone}, Goal: ${goal}.`;
+    const message = `Hello IronForge Gym, I want to book a free trial batch slot. Details - Name: ${trimmedName}, Phone: ${phone}, Goal: ${goal}.`;
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${basicInfo.phone}&text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
@@ -48,7 +48,7 @@ const ContactForm = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
       return;
     }
 
-    const message = `Hello The Muscle Factory Gym, my name is ${trimmedName} and my phone number is ${phone}, and I want to purchase the ${selectedPlanName} membership plan priced at ${selectedPlanPrice}.`;
+    const message = `Hello IronForge Gym, my name is ${trimmedName} and my phone number is ${phone}, and I want to purchase the ${selectedPlanName} membership plan priced at ${selectedPlanPrice}.`;
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${basicInfo.phone}&text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
@@ -65,7 +65,7 @@ const ContactForm = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
                     <p className={`text-sm uppercase tracking-[0.35em] ${colors.brandPrimaryText}`}>Contact</p>
                     <h2 className="text-4xl font-black">Book a free trial batch slot</h2>
                     <p className={`max-w-2xl text-lg leading-relaxed ${colors.textSecondary}`}>
-                      Submit your details and start your premium workout experience with The Muscle Factory.
+                      Submit your details and start your premium workout experience with IronForge Gym.
                     </p>
                   </div>
 
@@ -188,13 +188,13 @@ const ContactForm = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
             </div>
 
             <a
-              href="https://www.google.com/maps/search/?api=1&query=The+Muscle+Factory+Gym+Jhotwara+Jaipur"
+              href="https://www.google.com/maps/search/?api=1&query=IronForge+Gym+Jhotwara+Jaipur"
               target="_blank"
               rel="noopener noreferrer"
               className="block relative cursor-pointer w-full h-72 md:h-full min-h-[300px] rounded-2xl border border-slate-800 opacity-80 hover:opacity-100 transition-opacity duration-300 shadow-xl overflow-hidden"
             >
               <iframe
-                title="The Muscle Factory Gym Location"
+                title="IronForge Gym Location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3556.8777174623434!2d75.7336712!3d26.9390196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db376ca32e19d%3A0x6bbaea3f6089fcbe!2sThe%20Muscle%20Factory%20Gym!5e0!3m2!1sen!2sin!4v1719999999999!5m2!1sen!2sin"
                 allowFullScreen=""
                 loading="lazy"

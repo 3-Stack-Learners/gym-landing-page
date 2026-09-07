@@ -59,6 +59,7 @@ const InstaSlider = () => {
   const pauseTimeoutRef = useRef(null);
   const animationFrameId = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isTouchActive, setIsTouchActive] = useState(false);
 
   // 1. Continuous hardware-accelerated auto-scroll via requestAnimationFrame
   useEffect(() => {
@@ -73,8 +74,8 @@ const InstaSlider = () => {
       lastTime = time;
 
       if (!isPaused.current && !isDown.current && sliderRef.current) {
-        // Continuous smooth auto-scroll: ~0.85px per frame normalized to 60fps
-        const move = 0.85 * (delta / 16.67);
+        // Continuous smooth auto-scroll with brisk, energetic pace: ~1.15px per frame normalized to 60fps
+        const move = 1.15 * (delta / 16.67);
         sliderRef.current.scrollLeft += move;
 
         // Seamless infinite wrap check
@@ -197,15 +198,17 @@ const InstaSlider = () => {
     sliderRef.current.scrollLeft = newScrollLeft;
   };
 
-  // 5. Touch Handlers for Mobile Swipe
+  // 5. Touch Handlers for Mobile Swipe (isolates snap-mandatory to user swipes)
   const handleTouchStart = () => {
     isPaused.current = true;
+    setIsTouchActive(true);
     if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
   };
 
   const handleTouchEnd = () => {
     if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
     pauseTimeoutRef.current = setTimeout(() => {
+      setIsTouchActive(false);
       isPaused.current = false;
     }, 1800);
   };
@@ -228,7 +231,7 @@ const InstaSlider = () => {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-black hover:bg-[#D4FF00] hover:border-[#D4FF00] text-xs sm:text-sm font-bold uppercase tracking-wider transition-all group shadow-sm cursor-pointer"
           >
             <InstagramIcon className="w-4 h-4 text-[#D4FF00] group-hover:text-black transition-colors" />
-            <span>@themusclefactorygym</span>
+            <span>@ironforgegym</span>
             <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-black transition-colors" />
           </a>
           <span className="text-xs font-bold uppercase tracking-widest text-zinc-400 hidden sm:inline-block">
@@ -280,7 +283,9 @@ const InstaSlider = () => {
           onMouseMove={handleMouseMove}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          className={`w-full overflow-x-auto flex gap-4 sm:gap-6 px-4 sm:px-8 py-3 select-none scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] ${
+          className={`w-full flex overflow-x-auto ${
+            isTouchActive ? "snap-x snap-mandatory scroll-smooth" : ""
+          } no-scrollbar gap-4 sm:gap-6 px-4 sm:px-8 py-3 select-none ${
             isDragging ? "cursor-grabbing" : "cursor-grab"
           }`}
         >
@@ -288,7 +293,7 @@ const InstaSlider = () => {
             <div
               key={`${idx}-${item.caption}`}
               onClick={handleCardClick}
-              className="w-[240px] sm:w-[280px] md:w-[320px] aspect-[4/5] shrink-0 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-xl group relative select-none cursor-pointer"
+              className="w-[88vw] sm:w-[320px] shrink-0 snap-center snap-always aspect-[4/5] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-xl group relative select-none cursor-pointer"
             >
               {/* High-Resolution Gym Photo with Hover Zoom */}
               <img
@@ -311,7 +316,7 @@ const InstaSlider = () => {
                   <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/10 text-[11px] text-zinc-400 group-hover:text-[#D4FF00] transition-colors">
                     <div className="flex items-center gap-1.5">
                       <InstagramIcon className="w-3.5 h-3.5 text-[#D4FF00]" />
-                      <span className="font-semibold tracking-wide">@themusclefactorygym</span>
+                      <span className="font-semibold tracking-wide">@ironforgegym</span>
                     </div>
                     <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all text-[#D4FF00]" />
                   </div>

@@ -106,11 +106,9 @@ const FitnessCalculator = () => {
 
   const handleConsultClick = (e) => {
     e.preventDefault();
-    const contactSection = document.querySelector("#contact");
-    if (contactSection) {
-      const yOffset = -80;
-      const y = contactSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
+    const targetSection = document.querySelector("#contact") || document.querySelector("#free-pass");
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -376,12 +374,11 @@ const FitnessCalculator = () => {
                 onClick={handleConsultClick}
                 className="w-full bg-[#D4FF00] hover:bg-[#bce600] active:scale-95 text-black font-extrabold tracking-wide uppercase text-xs py-3.5 px-4 rounded-xl shadow-lg shadow-[#D4FF00]/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>Get Customized Meal Plan</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Book Nutrition Consultation →</span>
               </a>
 
               <p className="text-[10px] text-zinc-500 text-center mt-3 leading-relaxed">
-                *Estimates based on standard metabolic formulas. Consult our certified coaches for customized meal plans.
+                *Estimates based on standard metabolic formulas. Connect with our certified gym trainers for professional nutrition coaching.
               </p>
             </div>
 

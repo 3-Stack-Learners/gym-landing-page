@@ -1,9 +1,8 @@
 import { useEffect, useState, useRef } from "react";
-import logo from "../assets/logo.jpeg";
 import gymThemeConfig from "../data/gymThemeConfig";
 
 const Navbar = ({ setActivePricingTab }) => {
-  const { gymName, basicInfo } = gymThemeConfig;
+  const { basicInfo } = gymThemeConfig;
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -138,23 +137,19 @@ const Navbar = ({ setActivePricingTab }) => {
             onClick={(e) => handleNavClick(e, "#hero")}
             className="flex items-center gap-3 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4FF00] rounded-lg p-1"
           >
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg overflow-hidden border border-white/10 group-hover:border-[#D4FF00]/60 transition-colors duration-300 shrink-0">
-              <img
-                src={logo}
-                alt={`${gymName} logo`}
-                width={44}
-                height={44}
-                decoding="async"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 aspect-square"
-              />
+            {/* Minimal Modern IronForge Badge Icon */}
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-zinc-900 border border-zinc-800 group-hover:border-[#D4FF00]/70 group-hover:shadow-[0_0_20px_rgba(212,255,0,0.25)] flex items-center justify-center transition-all duration-300 shrink-0">
+              <svg className="w-5 h-5 text-[#D4FF00] transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 5v14M18 5v14M2 9v6M22 9v6M6 12h12" />
+              </svg>
             </div>
             <div className="flex flex-col">
               <span className="font-display font-black tracking-tight text-base sm:text-lg text-white uppercase group-hover:text-[#D4FF00] transition-colors">
-                {gymName}
+                IRONFORGE
               </span>
               <span className="text-[10px] font-bold tracking-[0.2em] text-zinc-400 uppercase -mt-0.5 flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#D4FF00] inline-block animate-pulse" />
-                Fitness Center
+                Fitness Club
               </span>
             </div>
           </a>

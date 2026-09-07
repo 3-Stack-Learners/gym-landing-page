@@ -45,6 +45,7 @@ const Trainers = () => {
   const pauseTimeoutRef = useRef(null);
   const animationFrameId = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isTouchActive, setIsTouchActive] = useState(false);
 
   // 1. Continuous hardware-accelerated auto-scroll via requestAnimationFrame
   useEffect(() => {
@@ -59,8 +60,8 @@ const Trainers = () => {
       lastTime = time;
 
       if (!isPaused.current && !isDown.current && sliderRef.current) {
-        // Continuous smooth auto-scroll: ~0.85px per frame normalized to 60fps
-        const move = 0.85 * (delta / 16.67);
+        // Continuous smooth auto-scroll: ~1.15px per frame normalized to 60fps
+        const move = 1.15 * (delta / 16.67);
         sliderRef.current.scrollLeft += move;
 
         // Seamless infinite wrap check
@@ -185,12 +186,14 @@ const Trainers = () => {
   // 5. Touch Handlers for Mobile Swipe
   const handleTouchStart = () => {
     isPaused.current = true;
+    setIsTouchActive(true);
     if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
   };
 
   const handleTouchEnd = () => {
     if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
     pauseTimeoutRef.current = setTimeout(() => {
+      setIsTouchActive(false);
       isPaused.current = false;
     }, 1800);
   };
@@ -260,14 +263,16 @@ const Trainers = () => {
             onMouseMove={handleMouseMove}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
-            className={`w-full overflow-x-auto flex gap-4 sm:gap-6 px-4 sm:px-8 py-3 select-none scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] ${
+            className={`w-full flex overflow-x-auto ${
+              isTouchActive ? "snap-x snap-mandatory scroll-smooth" : ""
+            } no-scrollbar gap-4 sm:gap-6 px-4 sm:px-8 py-3 select-none ${
               isDragging ? "cursor-grabbing" : "cursor-grab"
             }`}
           >
             {repeatedTrainers.map((trainer, idx) => (
               <div
                 key={`${idx}-${trainer.name}`}
-                className="w-[260px] sm:w-[290px] md:w-[320px] aspect-[4/5] shrink-0 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-xl group relative select-none cursor-pointer"
+                className="w-[88vw] sm:w-[320px] shrink-0 snap-center snap-always aspect-[4/5] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-xl group relative select-none cursor-pointer"
               >
                 {/* Athletic Fitness Portrait Photo */}
                 <img

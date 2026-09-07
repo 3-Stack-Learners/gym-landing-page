@@ -1,5 +1,4 @@
 import { Phone, MessageSquare } from "lucide-react";
-import logo from "../assets/logo.jpeg";
 import gymThemeConfig from "../data/gymThemeConfig";
 
 const InstagramIcon = ({ className = "w-4 h-4" }) => (
@@ -29,17 +28,14 @@ const Footer = () => {
             onClick={handleLogoClick}
             className="flex items-center gap-2.5 cursor-pointer group"
           >
-            <img
-              src={logo}
-              alt={`${gymName} logo`}
-              width={36}
-              height={36}
-              loading="lazy"
-              decoding="async"
-              className="w-9 h-9 rounded-lg object-cover border border-white/10 aspect-square shrink-0 group-hover:border-[#D4FF00]/50 transition-colors"
-            />
+            {/* Minimal Modern IronForge Badge Icon */}
+            <div className="w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 group-hover:border-[#D4FF00]/70 group-hover:shadow-[0_0_14px_rgba(212,255,0,0.25)] flex items-center justify-center transition-all duration-300 shrink-0">
+              <svg className="w-4.5 h-4.5 text-[#D4FF00]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 5v14M18 5v14M2 9v6M22 9v6M6 12h12" />
+              </svg>
+            </div>
             <span className="font-display font-black text-base tracking-tight text-white uppercase group-hover:text-[#D4FF00] transition-colors">
-              {gymName}
+              IRONFORGE
             </span>
           </a>
           <span className="hidden sm:inline-block text-zinc-700">•</span>

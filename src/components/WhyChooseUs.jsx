@@ -24,7 +24,7 @@ const WhyChooseUs = () => {
             WHY CHOOSE US
           </span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight">
-            WHY THE MUSCLE FACTORY <span className="text-[#D4FF00]">STANDS OUT.</span>
+            WHY IRONFORGE <span className="text-[#D4FF00]">STANDS OUT.</span>
           </h2>
           <p className="text-sm sm:text-base text-zinc-400 mt-3 max-w-xl mx-auto leading-relaxed">
             Discover the premium mix of expert coaching, elite facilities, and flexible training options built to keep you motivated and moving.

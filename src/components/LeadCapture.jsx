@@ -79,10 +79,10 @@ const LeadCapture = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
         : rawDigits;
 
     if (isPaidPlan) {
-      return `Hello The Muscle Factory, I have reserved my ${selectedPlanName} membership (${selectedPlanPrice || "Special Rate"}). Details: Name: ${trimmedName}, Phone: ${sanitizedPhone}, Slot: ${preferredSlot}, Booking Ref: ${passId} | Issued: ${issuedAt}. Please guide me with payment and activation.`;
+      return `Hello IronForge Gym, I have reserved my ${selectedPlanName} membership (${selectedPlanPrice || "Special Rate"}). Details: Name: ${trimmedName}, Phone: ${sanitizedPhone}, Slot: ${preferredSlot}, Booking Ref: ${passId} | Issued: ${issuedAt}. Please guide me with payment and activation.`;
     }
 
-    return `Hello The Muscle Factory, I have generated my Free 1-Day Pass. Details: Name: ${trimmedName}, Phone: ${sanitizedPhone}, Slot: ${preferredSlot}, Pass ID: ${passId} | Issued: ${issuedAt}. Please confirm my slot.`;
+    return `Hello IronForge Gym, I have generated my Free 1-Day Pass. Details: Name: ${trimmedName}, Phone: ${sanitizedPhone}, Slot: ${preferredSlot}, Pass ID: ${passId} | Issued: ${issuedAt}. Please confirm my slot.`;
   };
 
   const getWhatsAppUrl = () => {
@@ -163,7 +163,7 @@ const LeadCapture = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
               {/* Digital Pass / Reservation Summary Card */}
               <div className="w-full max-w-md p-4 sm:p-5 rounded-2xl bg-zinc-950 border border-zinc-800 mb-3 text-left text-xs space-y-2 shadow-inner">
                 <div className="flex items-center justify-between pb-2 border-b border-zinc-800/80">
-                  <span className="font-display font-black text-sm uppercase text-white tracking-wider">The Muscle Factory</span>
+                  <span className="font-display font-black text-sm uppercase text-white tracking-wider">IronForge Gym</span>
                   <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#D4FF00]/10 text-[#D4FF00] border border-[#D4FF00]/30">
                     {isPaidPlan ? "Membership Lock" : "VIP Pass"}
                   </span>
@@ -406,7 +406,7 @@ const LeadCapture = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
                   {basicInfo.address}
                 </p>
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=The+Muscle+Factory+Gym+Jhotwara+Jaipur"
+                  href="https://www.google.com/maps/search/?api=1&query=IronForge+Gym+Jhotwara+Jaipur"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-[11px] font-bold text-[#D4FF00] hover:text-[#bce600] mt-1.5 uppercase tracking-wider transition-colors"
@@ -440,7 +440,7 @@ const LeadCapture = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
             <div className="flex items-center justify-start md:justify-end w-full pt-1 md:pt-0">
               <a
                 href={`https://api.whatsapp.com/send?phone=${basicInfo.phone}&text=${encodeURIComponent(
-                  "Hi The Muscle Factory, I have a quick question about gym memberships and facilities."
+                  "Hi IronForge Gym, I have a quick question about gym memberships and facilities."
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
