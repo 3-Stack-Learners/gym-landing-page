@@ -32,8 +32,8 @@ const trainers = [
   },
 ];
 
-// Duplicate trainer array for seamless infinite marquee wrap
-const repeatedTrainers = [...trainers, ...trainers];
+// Duplicate trainer array 3 times for true seamless infinite loop in both directions
+const repeatedTrainers = [...trainers, ...trainers, ...trainers];
 
 const Trainers = () => {
   const sliderRef = useRef(null);
@@ -45,9 +45,30 @@ const Trainers = () => {
   const pauseTimeoutRef = useRef(null);
   const animationFrameId = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [isTouchActive, setIsTouchActive] = useState(false);
 
-  // 1. Continuous hardware-accelerated auto-scroll via requestAnimationFrame
+  // 1. Initial mount: Position scrollLeft at the start of the middle duplicate set
+  useEffect(() => {
+    const container = sliderRef.current;
+    if (!container) return;
+
+    const setInitialPosition = () => {
+      const singleSetWidth = container.scrollWidth / 3;
+      if (singleSetWidth > 0) {
+        container.scrollLeft = singleSetWidth;
+      }
+    };
+
+    setInitialPosition();
+    const rafId = requestAnimationFrame(setInitialPosition);
+    const timer = setTimeout(setInitialPosition, 60);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(timer);
+    };
+  }, []);
+
+  // 2. Continuous hardware-accelerated auto-scroll via requestAnimationFrame
   useEffect(() => {
     const container = sliderRef.current;
     if (!container) return;
@@ -65,9 +86,9 @@ const Trainers = () => {
         sliderRef.current.scrollLeft += move;
 
         // Seamless infinite wrap check
-        const halfWidth = sliderRef.current.scrollWidth / 2;
-        if (halfWidth > 0 && sliderRef.current.scrollLeft >= halfWidth) {
-          sliderRef.current.scrollLeft -= halfWidth;
+        const singleSetWidth = sliderRef.current.scrollWidth / 3;
+        if (singleSetWidth > 0 && sliderRef.current.scrollLeft >= singleSetWidth * 2) {
+          sliderRef.current.scrollLeft -= singleSetWidth;
         }
       }
 
@@ -86,21 +107,24 @@ const Trainers = () => {
     };
   }, []);
 
-  // 2. Wrap check on native scroll (e.g. touch gestures or trackpad)
+  // 3. Bidirectional Infinite Wrap Check on native scroll (touch gestures or trackpad)
   const handleScroll = () => {
     const container = sliderRef.current;
     if (!container) return;
-    const halfWidth = container.scrollWidth / 2;
-    if (halfWidth <= 0) return;
+    const singleSetWidth = container.scrollWidth / 3;
+    if (singleSetWidth <= 0) return;
 
-    if (container.scrollLeft >= halfWidth) {
-      container.scrollLeft -= halfWidth;
-    } else if (container.scrollLeft < 0) {
-      container.scrollLeft += halfWidth;
+    // Scrolled forward (right) past the middle set: wrap seamlessly back
+    if (container.scrollLeft >= singleSetWidth * 2) {
+      container.scrollLeft -= singleSetWidth;
+    }
+    // Scrolled backward (left) towards the beginning: wrap seamlessly forward
+    else if (container.scrollLeft <= 10) {
+      container.scrollLeft += singleSetWidth;
     }
   };
 
-  // 3. Desktop Prev / Next Smooth Click Scrolling
+  // 4. Desktop Prev / Next Smooth Click Scrolling
   const scroll = (direction) => {
     const container = sliderRef.current;
     if (!container) return;
@@ -108,17 +132,17 @@ const Trainers = () => {
     isPaused.current = true;
     if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
 
-    const halfWidth = container.scrollWidth / 2;
-    const amount = 320;
+    const singleSetWidth = container.scrollWidth / 3;
+    const amount = 340;
 
     if (direction === "left") {
-      if (container.scrollLeft - amount < 0 && halfWidth > 0) {
-        container.scrollLeft += halfWidth;
+      if (container.scrollLeft - amount <= 10 && singleSetWidth > 0) {
+        container.scrollLeft += singleSetWidth;
       }
       container.scrollBy({ left: -amount, behavior: "smooth" });
     } else {
-      if (container.scrollLeft + amount >= halfWidth && halfWidth > 0) {
-        container.scrollLeft -= halfWidth;
+      if (container.scrollLeft + amount >= singleSetWidth * 2 && singleSetWidth > 0) {
+        container.scrollLeft -= singleSetWidth;
       }
       container.scrollBy({ left: amount, behavior: "smooth" });
     }
@@ -126,7 +150,7 @@ const Trainers = () => {
     // Resume continuous ticker after smooth transition completes
     pauseTimeoutRef.current = setTimeout(() => {
       isPaused.current = false;
-    }, 1200);
+    }, 1800);
   };
 
   // 4. Mouse Drag-To-Scroll Handlers
@@ -168,15 +192,15 @@ const Trainers = () => {
     }
 
     let newScrollLeft = scrollLeftStart.current - walk;
-    const halfWidth = sliderRef.current.scrollWidth / 2;
+    const singleSetWidth = sliderRef.current.scrollWidth / 3;
 
-    if (halfWidth > 0) {
-      if (newScrollLeft >= halfWidth) {
-        newScrollLeft -= halfWidth;
-        scrollLeftStart.current -= halfWidth;
-      } else if (newScrollLeft < 0) {
-        newScrollLeft += halfWidth;
-        scrollLeftStart.current += halfWidth;
+    if (singleSetWidth > 0) {
+      if (newScrollLeft >= singleSetWidth * 2) {
+        newScrollLeft -= singleSetWidth;
+        scrollLeftStart.current -= singleSetWidth;
+      } else if (newScrollLeft <= 10) {
+        newScrollLeft += singleSetWidth;
+        scrollLeftStart.current += singleSetWidth;
       }
     }
 
@@ -186,14 +210,12 @@ const Trainers = () => {
   // 5. Touch Handlers for Mobile Swipe
   const handleTouchStart = () => {
     isPaused.current = true;
-    setIsTouchActive(true);
     if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
   };
 
   const handleTouchEnd = () => {
     if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
     pauseTimeoutRef.current = setTimeout(() => {
-      setIsTouchActive(false);
       isPaused.current = false;
     }, 1800);
   };
@@ -263,16 +285,16 @@ const Trainers = () => {
             onMouseMove={handleMouseMove}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
-            className={`w-full flex overflow-x-auto ${
-              isTouchActive ? "snap-x snap-mandatory scroll-smooth" : ""
-            } no-scrollbar gap-4 sm:gap-6 px-4 sm:px-8 py-3 select-none ${
+            onTouchCancel={handleTouchEnd}
+            style={{ WebkitOverflowScrolling: "touch", overscrollBehaviorX: "contain" }}
+            className={`w-full flex overflow-x-auto no-scrollbar gap-4 sm:gap-6 px-4 sm:px-8 py-3 select-none overscroll-x-contain touch-pan-x ${
               isDragging ? "cursor-grabbing" : "cursor-grab"
             }`}
           >
             {repeatedTrainers.map((trainer, idx) => (
               <div
                 key={`${idx}-${trainer.name}`}
-                className="w-[88vw] sm:w-[320px] shrink-0 snap-center snap-always aspect-[4/5] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-xl group relative select-none cursor-pointer"
+                className="w-[85vw] sm:w-[320px] shrink-0 aspect-[4/5] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-xl group relative select-none cursor-pointer"
               >
                 {/* Athletic Fitness Portrait Photo */}
                 <img
