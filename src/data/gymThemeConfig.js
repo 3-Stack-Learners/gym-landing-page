@@ -3,15 +3,15 @@ const gymThemeConfig = {
   design: {
     fontFamily: "font-sans",
     colors: {
-      bgMain: "bg-slate-950",
-      bgCard: "bg-slate-900",
+      bgMain: "bg-zinc-950",
+      bgCard: "bg-zinc-900",
       textPrimary: "text-white",
-      textSecondary: "text-slate-400",
-      brandPrimary: "bg-red-600",
-      brandPrimaryText: "text-red-500",
-      brandHover: "hover:bg-red-700",
-      borderColor: "border-slate-800",
-      overlayDark: "bg-black/70",
+      textSecondary: "text-zinc-400",
+      brandPrimary: "bg-[#D4FF00]",
+      brandPrimaryText: "text-[#D4FF00]",
+      brandHover: "hover:bg-[#bce600]",
+      borderColor: "border-zinc-800",
+      overlayDark: "bg-black/80",
     },
   },
   basicInfo: {

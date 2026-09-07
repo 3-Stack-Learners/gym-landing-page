@@ -1,77 +1,85 @@
-import React, { useEffect, useRef, useState } from "react";
+import { Dumbbell, HeartPulse, Activity, Users, TrendingUp, Waves, Clock } from "lucide-react";
 import gymThemeConfig from "../data/gymThemeConfig";
-import InstaSlider from "./InstaSlider";
 
 const GymDetails = () => {
-  const {
-    design: { colors },
-    amenities,
-  } = gymThemeConfig;
+  const { amenities } = gymThemeConfig;
 
-  const trackRef = useRef(null);
-  const [progress, setProgress] = useState(0);
-
-  const updateProgress = () => {
-    const el = trackRef.current;
-    if (!el) return;
-    const max = el.scrollWidth - el.clientWidth;
-    const value = max > 0 ? Math.round((el.scrollLeft / max) * 100) : 0;
-    setProgress(value);
+  // Icon mapping for amenities
+  const amenityIcons = {
+    "amenity-1": Dumbbell,
+    "amenity-2": HeartPulse,
+    "amenity-3": Activity,
+    "amenity-4": Users,
+    "amenity-5": TrendingUp,
+    "amenity-6": Waves,
+    "amenity-7": Clock,
   };
 
-  useEffect(() => {
-    updateProgress();
-    const el = trackRef.current;
-    if (!el) return;
-    el.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
-    return () => {
-      el.removeEventListener("scroll", updateProgress);
-      window.removeEventListener("resize", updateProgress);
-    };
-  }, [amenities.length]);
+  const amenityTags = {
+    "amenity-1": "Strength & Olympic Iron",
+    "amenity-2": "Conditioning Zone",
+    "amenity-3": "Functional Fitness",
+    "amenity-4": "Certified Mentorship",
+    "amenity-5": "Hypertrophy Guidance",
+    "amenity-6": "Recovery & Aqua",
+    "amenity-7": "24/7 VIP Access",
+  };
 
   return (
-    <section id="services" className={`w-full ${colors.bgMain} ${colors.textPrimary}`}>
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10 ">
-        <div className="space-y-6">
-          <div className={`text-sm uppercase tracking-[0.35em] ${colors.brandPrimaryText}`}>Gym Amenities</div>
-          <h2 className="text-4xl font-black tracking-tight">Built for every athlete, every goal.</h2>
-          <p className={`max-w-3xl text-lg leading-relaxed ${colors.textSecondary}`}>
-            Explore premium zones, strength systems, and purposeful recovery spaces designed to keep every workout efficient and energizing.
+    <section id="amenities" className="relative w-full py-20 sm:py-24 lg:py-28 bg-zinc-950 overflow-hidden">
+      {/* Subtle Ambient Glow Accent */}
+      <div className="absolute top-1/3 right-0 w-80 h-80 bg-[#D4FF00]/5 rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+          <span className="text-[#D4FF00] text-xs sm:text-sm font-bold tracking-[0.25em] uppercase inline-block mb-2">
+            PREMIUM AMENITIES
+          </span>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight">
+            BUILT FOR EVERY ATHLETE, <span className="text-[#D4FF00]">EVERY GOAL.</span>
+          </h2>
+          <p className="text-sm sm:text-base text-zinc-400 mt-3 max-w-xl mx-auto leading-relaxed">
+            Explore dedicated training systems, Olympic lifting platforms, and purposeful recovery amenities engineered for peak performance.
           </p>
         </div>
 
-        <div className="relative">
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-slate-950 to-transparent z-10 md:hidden" />
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-slate-950 to-transparent z-10 md:hidden" />
-          <div
-            ref={trackRef}
-            className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 pb-4 px-4 -mx-4"
-          >
-            {amenities.map((item) => (
+        {/* Amenities Responsive Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
+          {amenities.map((item) => {
+            const Icon = amenityIcons[item.id] || Dumbbell;
+            const tag = amenityTags[item.id] || "Gym Amenity";
+
+            return (
               <div
                 key={item.id}
-                className={`w-[80vw] shrink-0 snap-center md:w-full group relative rounded-3xl border ${colors.borderColor} ${colors.bgCard} p-6 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl hover:border-red-600`}
+                className="bg-zinc-900/50 border border-zinc-800 hover:border-[#D4FF00]/40 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between"
               >
-                <h3 className="text-2xl font-semibold mb-3">{item.title}</h3>
-                <p className={`text-sm leading-relaxed ${colors.textSecondary}`}>{item.description}</p>
+                <div>
+                  {/* Top Bar with Icon & Tag */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="text-[#D4FF00] bg-[#D4FF00]/10 p-3 rounded-lg w-fit group-hover:bg-[#D4FF00] group-hover:text-black transition-all duration-300">
+                      <Icon className="w-5 h-5" strokeWidth={2.2} />
+                    </div>
+                    <span className="border border-[#D4FF00]/20 text-zinc-300 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-zinc-900">
+                      {tag}
+                    </span>
+                  </div>
+
+                  {/* Title & Description */}
+                  <h3 className="text-base sm:text-lg font-bold text-white mb-2 font-display">
+                    {item.title}
+                  </h3>
+                  <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
               </div>
-            ))}
-          </div>
-          <div className="md:hidden px-4 -mx-4">
-            <div className="h-1 rounded-full bg-slate-800 overflow-hidden">
-              <div className="h-full bg-red-600 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
-            </div>
-          </div>
+            );
+          })}
         </div>
 
-        <div className="space-y-6">
-          <div className={`text-sm uppercase tracking-[0.35em] ${colors.brandPrimaryText}`}>Instagram Gallery</div>
-          <h2 className="text-4xl font-black tracking-tight">Real gym moments in every frame.</h2>
-        </div>
-
-        <InstaSlider />
       </div>
     </section>
   );

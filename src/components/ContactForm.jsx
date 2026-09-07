@@ -79,7 +79,7 @@ const ContactForm = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
                         type="text"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
-                        className={`w-full rounded-2xl border ${colors.borderColor} ${colors.bgMain} ${colors.textPrimary} px-4 py-3 outline-none transition-all duration-300 focus:ring-2 focus:ring-red-500`}
+                        className={`w-full rounded-2xl border ${colors.borderColor} ${colors.bgMain} ${colors.textPrimary} px-4 py-3 outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4FF00]`}
                         placeholder="Enter your full name"
                       />
                     </div>
@@ -93,7 +93,7 @@ const ContactForm = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
                         type="tel"
                         value={phone}
                         onChange={(event) => setPhone(event.target.value)}
-                        className={`w-full rounded-2xl border ${colors.borderColor} ${colors.bgMain} ${colors.textPrimary} px-4 py-3 outline-none transition-all duration-300 focus:ring-2 focus:ring-red-500`}
+                        className={`w-full rounded-2xl border ${colors.borderColor} ${colors.bgMain} ${colors.textPrimary} px-4 py-3 outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4FF00]`}
                         placeholder="Enter your 10-digit mobile number"
                       />
                     </div>
@@ -106,7 +106,7 @@ const ContactForm = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
                         id="goal"
                         value={goal}
                         onChange={(event) => setGoal(event.target.value)}
-                        className={`w-full rounded-2xl border ${colors.borderColor} ${colors.bgMain} ${colors.textPrimary} px-4 py-3 outline-none transition-all duration-300 focus:ring-2 focus:ring-red-500`}
+                        className={`w-full rounded-2xl border ${colors.borderColor} ${colors.bgMain} ${colors.textPrimary} px-4 py-3 outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4FF00]`}
                       >
                         <option value="" disabled>
                           Select Your Fitness Goal
@@ -120,7 +120,7 @@ const ContactForm = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
 
                     <button
                       type="submit"
-                      className={`${colors.brandPrimary} ${colors.textPrimary} w-full rounded-2xl px-6 py-4 text-base font-semibold transition-all duration-300 hover:scale-[1.03] active:scale-95`}
+                      className="w-full rounded-2xl bg-[#D4FF00] text-black hover:bg-[#bce600] font-bold px-6 py-4 text-base transition-all duration-300 hover:scale-[1.03] active:scale-95"
                     >
                       Send via WhatsApp
                     </button>
@@ -149,7 +149,7 @@ const ContactForm = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
                         type="text"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
-                        className="w-full rounded-2xl border border-slate-800 bg-slate-950 text-white px-4 py-3 outline-none transition-all duration-300 focus:ring-2 focus:ring-red-500"
+                        className="w-full rounded-2xl border border-slate-800 bg-slate-950 text-white px-4 py-3 outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4FF00]"
                         placeholder="Enter your full name"
                       />
                     </div>
@@ -163,14 +163,14 @@ const ContactForm = ({ activeFormMode, setActiveFormMode, selectedPlanName, sele
                         type="tel"
                         value={phone}
                         onChange={(event) => setPhone(event.target.value)}
-                        className="w-full rounded-2xl border border-slate-800 bg-slate-950 text-white px-4 py-3 outline-none transition-all duration-300 focus:ring-2 focus:ring-red-500"
+                        className="w-full rounded-2xl border border-slate-800 bg-slate-950 text-white px-4 py-3 outline-none transition-all duration-300 focus:ring-2 focus:ring-[#D4FF00]"
                         placeholder="Enter your 10-digit mobile number"
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="w-full rounded-2xl bg-red-600 px-6 py-4 text-base font-semibold text-white transition-all duration-300 hover:scale-[1.03] active:scale-95"
+                      className="w-full rounded-2xl bg-[#D4FF00] hover:bg-[#bce600] px-6 py-4 text-base font-bold text-black transition-all duration-300 hover:scale-[1.03] active:scale-95"
                     >
                       Send Membership Inquiry
                     </button>

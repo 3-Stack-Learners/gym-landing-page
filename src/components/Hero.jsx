@@ -1,45 +1,109 @@
-import gymThemeConfig from "../data/gymThemeConfig";
+import heroFallback from "../assets/mf2.jpg";
 
 const Hero = () => {
-  const { gymName, heroBgImage, design } = gymThemeConfig;
-  const { colors } = design;
-  const navLinks = [
-    { name: "Home", id: "#home" },
-    { name: "About", id: "#about" },
-    { name: "Services", id: "#services" },
-    { name: "Pricing", id: "#pricing" },
-    { name: "Contact", id: "#contact" },
-  ];
+  const handleSmoothScroll = (e, targetId) => {
+    e.preventDefault();
+    const element = document.querySelector(targetId);
+    if (element) {
+      const yOffset = -80;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   return (
     <section
-      id="home"
-      className="w-full relative min-h-[65vh] md:min-h-screen py-12 md:py-0 flex flex-col justify-center items-center text-center relative overflow-hidden px-6 md:px-12 bg-cover bg-center"
-      style={{ backgroundImage: `url(${heroBgImage})` }}
+      id="hero"
+      className="relative w-full min-h-[90vh] scroll-mt-24 flex flex-col justify-between pt-28 pb-6 px-4 sm:px-6 lg:px-8 bg-zinc-950 overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-slate-950" />
+      {/* 1. Visible Gym Background Image Container */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat filter brightness-75 contrast-110 z-0 transition-opacity duration-700"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1920&auto=format&fit=crop'), url('${heroFallback}')`,
+        }}
+      />
 
-      <div className="relative z-10 max-w-7xl mx-auto h-full w-full">
-        <div className="flex flex-col items-center text-center justify-center min-h-full px-4 pt-28 sm:pt-32 pb-12">
-          <div className="w-full max-w-xl md:max-w-4xl mx-auto mb-10 md:mb-12">
-            <span className={`mb-4 text-sm uppercase tracking-[0.45em] ${colors.brandPrimaryText}`}>
-              SHAPE YOUR BODY
+      {/* Balanced Lightened Vignette Overlay for High Environment Visibility & Text Legibility */}
+      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/50 to-zinc-950/70 z-0" />
+      <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/70 via-transparent to-zinc-950/70 z-0" />
+      <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_35%,#09090b_95%] z-0 pointer-events-none" />
+
+      {/* Subtle Radial Athletic Lime Ambient Glow behind Headline */}
+      <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[320px] bg-[#D4FF00]/15 blur-[140px] pointer-events-none z-0" />
+
+      {/* 2. Main Punchy Centered Content (relative z-10) */}
+      <div className="relative z-10 max-w-5xl mx-auto my-auto text-center flex flex-col items-center">
+        {/* Eyebrow Badge */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase border border-[#D4FF00]/30 bg-[#D4FF00]/10 text-[#D4FF00] mb-4 shadow-sm backdrop-blur-md">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#D4FF00] animate-pulse" />
+          <span>PREMIUM FITNESS & PERFORMANCE</span>
+        </div>
+
+        {/* Massive Crisp Headline */}
+        <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-white leading-none mb-4 drop-shadow-[0_4px_30px_rgba(0,0,0,0.9)]">
+          BUILD YOUR <span className="text-[#D4FF00]">LEGACY</span>
+        </h1>
+
+        {/* 2-Line Punchy Subtitle */}
+        <p className="text-base sm:text-xl text-zinc-100 font-medium max-w-xl mb-8 tracking-wide leading-relaxed drop-shadow-md">
+          Jaipur&apos;s elite equipment, expert coaching, and 24/7 access.
+          <span className="block text-zinc-300 text-sm sm:text-base mt-1 font-normal">
+            Train without limits in an unapologetic iron atmosphere.
+          </span>
+        </p>
+
+        {/* Dual High-Contrast CTA Action Buttons */}
+        <div className="flex flex-row items-center justify-center gap-3.5 w-full sm:w-auto">
+          {/* Main High-Contrast Athletic Lime Button */}
+          <a
+            href="#free-pass"
+            onClick={(e) => handleSmoothScroll(e, "#free-pass")}
+            className="min-h-[48px] py-3.5 px-7 rounded-xl bg-[#D4FF00] hover:bg-[#bce600] text-black font-extrabold tracking-wide uppercase text-sm shadow-lg shadow-[#D4FF00]/25 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span>Claim Free Pass</span>
+            <span>→</span>
+          </a>
+
+          {/* Secondary Sleek Frosted Glass Button */}
+          <a
+            href="#pricing"
+            onClick={(e) => handleSmoothScroll(e, "#pricing")}
+            className="min-h-[48px] py-3.5 px-7 rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 text-white border border-white/10 text-sm font-semibold tracking-wider transition-all flex items-center justify-center cursor-pointer backdrop-blur-md"
+          >
+            <span>Plans</span>
+          </a>
+        </div>
+      </div>
+
+      {/* 3. Compact Bottom Bar: 3 Quick Stats in Single Row */}
+      <div className="relative z-10 w-full max-w-4xl mx-auto pt-5 border-t border-white/10">
+        <div className="grid grid-cols-3 gap-2 text-center">
+          <div className="flex flex-col items-center">
+            <span className="font-display font-black text-xl sm:text-2xl text-white tracking-tight">
+              5k+ Sq Ft
             </span>
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-normal md:tracking-tight leading-[1.35] md:leading-tight px-4 mb-4 max-w-4xl mx-auto text-white">
-              Rise to a stronger future with <span className={colors.brandPrimaryText}>THE MUSCLE FACTORY</span>
-            </h1>
-            <p className="text-sm sm:text-base text-slate-300 max-w-md mx-auto mt-3 mb-6">
-              Train harder, recover smarter, and unlock the power of a red-hot gym experience designed for champions.
-            </p>
+            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#D4FF00] mt-0.5">
+              Floor Space
+            </span>
           </div>
 
-          <div className="flex justify-center w-full">
-            <a
-              href="#contact"
-              className={`${colors.brandPrimary} mt-10 rounded-full px-8 py-4 text-base font-semibold text-white transition-all duration-300 ${colors.brandHover} hover:scale-[1.03] active:scale-95 inline-flex items-center justify-center`}
-            >
-              Book Free Trial 💪
-            </a>
+          <div className="flex flex-col items-center border-x border-white/10">
+            <span className="font-display font-black text-xl sm:text-2xl text-white tracking-tight">
+              30+ Machines
+            </span>
+            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#D4FF00] mt-0.5">
+              Heavy Iron
+            </span>
+          </div>
+
+          <div className="flex flex-col items-center">
+            <span className="font-display font-black text-xl sm:text-2xl text-white tracking-tight">
+              15+ Coaches
+            </span>
+            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#D4FF00] mt-0.5">
+              Certified Pros
+            </span>
           </div>
         </div>
       </div>
