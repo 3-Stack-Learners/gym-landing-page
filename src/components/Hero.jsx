@@ -1,13 +1,28 @@
 import heroFallback from "../assets/mf2.jpg";
 
-const Hero = () => {
+const Hero = ({ setActivePricingTab }) => {
+  const handlePlansClick = (e) => {
+    if (e) e.preventDefault();
+    if (setActivePricingTab) {
+      setActivePricingTab("plans");
+    }
+    const plansBtn = document.querySelector('button[data-tab="plans"]');
+    if (plansBtn) {
+      plansBtn.click();
+    }
+    document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const handleSmoothScroll = (e, targetId) => {
     e.preventDefault();
-    const element = document.querySelector(targetId);
+    if (targetId === "#pricing") {
+      handlePlansClick(e);
+      return;
+    }
+    const id = targetId.startsWith("#") ? targetId.slice(1) : targetId;
+    const element = document.getElementById(id) || document.querySelector(targetId);
     if (element) {
-      const yOffset = -80;
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -68,7 +83,7 @@ const Hero = () => {
           {/* Secondary Sleek Frosted Glass Button */}
           <a
             href="#pricing"
-            onClick={(e) => handleSmoothScroll(e, "#pricing")}
+            onClick={handlePlansClick}
             className="min-h-[48px] py-3.5 px-7 rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 text-white border border-white/10 text-sm font-semibold tracking-wider transition-all flex items-center justify-center cursor-pointer backdrop-blur-md"
           >
             <span>Plans</span>

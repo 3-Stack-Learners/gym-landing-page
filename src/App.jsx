@@ -36,7 +36,7 @@ function App() {
     <div className={`w-full min-h-screen ${gymThemeConfig.design.colors.bgMain} flex flex-col p-0 m-0 overflow-x-hidden scroll-pt-24`}>
       {/* BLOCK 1: Navbar + Minimalist Full-Bleed Hero */}
       <Navbar activePricingTab={pricingTab} setActivePricingTab={setPricingTab} />
-      <Hero />
+      <Hero setActivePricingTab={setPricingTab} />
 
       {/* BLOCK 2: Programs & Why Us (Consolidated 4-Card Grid) */}
       <ProgramsWhyUs />

@@ -25,6 +25,7 @@ const PricingCalculator = ({
           <div className="inline-flex items-center p-1.5 rounded-2xl bg-zinc-900/90 border border-zinc-800 shadow-xl">
             <button
               type="button"
+              data-tab="plans"
               onClick={() => setActiveTab("plans")}
               className={`min-h-[46px] px-6 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-wider transition-all duration-200 cursor-pointer flex items-center gap-2 ${
                 activeTab === "plans"
@@ -38,6 +39,7 @@ const PricingCalculator = ({
 
             <button
               type="button"
+              data-tab="calculator"
               onClick={() => setActiveTab("calculator")}
               className={`min-h-[46px] px-6 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-wider transition-all duration-200 cursor-pointer flex items-center gap-2 ${
                 activeTab === "calculator"
